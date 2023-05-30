@@ -1,5 +1,6 @@
 package uz.qbg.appHotelServise.controllers;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
@@ -31,10 +32,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/room")
+@AllArgsConstructor
 public class RoomController {
 
-    @Autowired
-    RoomServise roomServise;
+    private final RoomServise roomServise;
 
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> add(@Valid @RequestBody RoomDto roomDto) {
@@ -67,7 +68,7 @@ public class RoomController {
     }
 
     @GetMapping(value = "/hotel_room", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public HttpEntity<?> getByCompanyId(@RequestParam Integer hotelID) {
+    public HttpEntity<?> getByCompanyId(@PathVariable Integer hotelID) {
         List<RoomDto> allByHotelId = roomServise.getAllByHotelId(hotelID);
         return ResponseEntity.ok(allByHotelId);
     }

@@ -1,7 +1,6 @@
 package uz.qbg.appHotelServise.controllers;
 
-import io.swagger.annotations.ApiParam;
-import javafx.application.Application;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpEntity;
@@ -32,11 +31,12 @@ import java.util.Map;
 
 @RestController
 @RequestMapping(value = "/api/v1/hotel")
+@AllArgsConstructor
 public class HotelController {
 
 
-    @Autowired
-    HotelService hotelService;
+
+    private final HotelService hotelService;
 
     @PostMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> create(@Valid @RequestBody HotelDto hotelDto) {
